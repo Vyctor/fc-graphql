@@ -8,7 +8,18 @@ import (
 )
 
 func (r *mutationResolver) CreateCategory(ctx context.Context, input model.NewCategory) (*model.Category, error) {
-	panic(fmt.Errorf("not implemented: CreateCategory - createCategory"))
+	category, err := r.CategoryDB.Create(input.Name, *input.Description)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.Category{
+		ID:          category.ID,
+		Name:        category.Name,
+		Description: &category.Description,
+	}, nil
+
 }
 
 func (r *mutationResolver) CreateCourse(ctx context.Context, input model.NewCourse) (*model.Course, error) {
