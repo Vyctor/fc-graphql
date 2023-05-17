@@ -10,7 +10,6 @@ type Course {
   name: String!
   description: String
   category: Category!
-  lessons: [Lesson!]!
 }
 
 input NewCategory {
